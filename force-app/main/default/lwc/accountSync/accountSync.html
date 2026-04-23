@@ -1,0 +1,96 @@
+<!--
+  @author Tran Trung Hieu
+  @modified 2026-04-21
+  @description HTML template for Account Sync Lightning Web Component.
+               Provides user interface for manual Account synchronization with SAP system,
+               including sync button, status display, last sync time, and error messages.
+-->
+<template>
+    <lightning-card>
+        <div class="slds-p-around_medium">
+            <!-- Header -->
+            <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+                <div class="slds-media slds-media_center">
+                    <lightning-icon icon-name="utility:sync" size="small"></lightning-icon>
+                    <div class="slds-m-left_small">
+                        <h2 class="slds-text-heading_medium">Sync Account Manually</h2>
+                    </div>
+                </div>
+
+                <lightning-button label="Sync" variant="brand" onclick={handleSync} disabled={isLoading}>
+                </lightning-button>
+            </div>
+
+            <!-- Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-is-relative slds-m-bottom_medium">
+                    <lightning-spinner size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Status Box -->
+            <div class="status-box slds-p-around_medium slds-box slds-theme_default">
+                <!-- Status -->
+                <div class="slds-grid slds-align_absolute-center slds-m-bottom_small">
+                    <span class="slds-text-heading_small"> {statusMessage} </span>
+
+                    <template if:true={isSuccess}>
+                        <lightning-icon
+                            icon-name="utility:success"
+                            variant="success"
+                            size="small"
+                            class="slds-m-left_small"
+                        ></lightning-icon>
+                    </template>
+
+                    <template if:true={isFailed}>
+                        <lightning-icon
+                            icon-name="utility:error"
+                            variant="error"
+                            size="small"
+                            class="slds-m-left_small"
+                        ></lightning-icon>
+                    </template>
+                </div>
+
+                <!-- Last Sync Time -->
+                <p class="slds-m-bottom_small">
+                    <strong>Last synchronization time: </strong>
+                    <template if:true={lastSyncTime}>
+                        <lightning-formatted-date-time
+                            value={lastSyncTime}
+                            year="numeric"
+                            month="2-digit"
+                            day="2-digit"
+                            hour="2-digit"
+                            minute="2-digit"
+                        >
+                        </lightning-formatted-date-time>
+                    </template>
+                    <template if:false={lastSyncTime}> N/A </template>
+                </p>
+
+                <!-- Message -->
+                <div class="slds-m-bottom_small">
+                    <strong>Message:</strong> {message}
+
+                    <!-- Error list -->
+                    <template if:true={hasErrors}>
+                        <ul class="slds-list_dotted slds-m-top_x-small">
+                            <template for:each={errorMessages} for:item="err">
+                                <li key={err}>{err}</li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+
+            <hr class="slds-m-vertical_medium" />
+
+            <!-- Footer -->
+            <div class="slds-text-align_center slds-text-color_weak">
+                Account Manual Synchronization with SAP system
+            </div>
+        </div>
+    </lightning-card>
+</template>
