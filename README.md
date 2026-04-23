@@ -1,4 +1,4 @@
-# Salesforce DX Project: Next Steps
+b# Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
 
@@ -19,3 +19,16 @@ The `sfdx-project.json` file contains useful configuration information for your 
 "# GMS-Integration-1" 
 "# GMS-Integration-1" 
 # GMS-Integration-1
+
+# Create Permission Sets & Custom Permission
+1. Create Custom Permission SAP Manual Sync
+2. Create Permission Sets SAP API Access
+3. Add Custom Permission to Permission Sets
+4. Assign the Permission Sets to Users
+
+# Set up API
+1. Create an External Credentials
+2. Create a Named Principle for the External Credentials
+3. Create a Named Credentials with the created External Credentials above for Authentication
+4. Add the External Credentials' Principal to the Permission Sets on External Credential Principal Access tab
+
